@@ -1,4 +1,5 @@
 import 'package:kajiansunnah/architectures/domain/repositories/AccountRepository.dart';
+import 'package:kajiansunnah/architectures/domain/usecases/GetLoggedInUserUseCase.dart';
 import 'package:kajiansunnah/architectures/domain/usecases/UserLoginUseCase.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kajiansunnah/architectures/data/repositories/DataAccountRepository.dart';
@@ -15,6 +16,7 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => UserLoginUseCase(sl()));
   sl.registerLazySingleton(() => UserRegisterUseCase(sl()));
+  sl.registerLazySingleton(() => GetLoggedInUserUseCase(sl()));
 
   // Repository
 
@@ -27,7 +29,9 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-    () => SplashCheckBloc(),
+    () => SplashCheckBloc(
+      getLoggedInUserUseCase: sl(),
+    ),
   );
 
   sl.registerFactory(

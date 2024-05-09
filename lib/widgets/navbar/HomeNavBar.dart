@@ -20,9 +20,13 @@ class HomeNavBar extends StatelessWidget {
 
     // var statusBarHeight = MediaQuery.of(context).viewPadding.top;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: FetchPixels.getPixelHeight(20)),
+      padding: EdgeInsets.symmetric(
+        horizontal: FetchPixels.getPixelHeight(20),
+        vertical: 8,
+      ),
       decoration: BoxDecoration(
-        color: Warna.warnaUtama,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
               color: shadowColor, blurRadius: 20, offset: const Offset(0, -2)),
@@ -46,22 +50,9 @@ class HomeNavBar extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 4.0),
-                          child: FaIcon(
-                            modelItem.theIcon,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(modelItem.nama,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Container(
-                            height: 2,
-                            width: 20,
-                            color: selected ? Colors.white : Warna.warnaUtama,
+                          child: Image.asset(
+                            "assets/icon/" + modelItem.iconImg,
+                            color: selected ? Warna.warnaUtama : null,
                           ),
                         ),
                       ],

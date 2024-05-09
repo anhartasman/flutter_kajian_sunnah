@@ -4,4 +4,5 @@ import 'package:kajiansunnah/architectures/domain/entities/UserRegistration.dart
 abstract class AccountRepository {
   Future<UserAccount> login(String email, String password);
   Future<void> register(UserRegistration userRegistration);
+  Future<UserAccount> getLoggedInUser();
 }

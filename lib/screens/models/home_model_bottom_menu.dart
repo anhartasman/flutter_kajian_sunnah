@@ -3,25 +3,29 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeModelBottomMenu {
   final String nama;
-  final IconData theIcon;
-  const HomeModelBottomMenu(this.nama, this.theIcon);
+  final String iconImg;
+  const HomeModelBottomMenu(this.nama, this.iconImg);
 }
 
 const List<HomeModelBottomMenu> bottomMenuList = [
   HomeModelBottomMenu(
     "Home",
-    FontAwesomeIcons.home,
+    "Home.png",
   ),
   HomeModelBottomMenu(
-    "Posts",
-    FontAwesomeIcons.book,
+    "Bookmark",
+    "Bookmark.png",
   ),
   HomeModelBottomMenu(
-    "Favourite",
-    FontAwesomeIcons.heart,
+    "Module",
+    "Module.png",
   ),
   HomeModelBottomMenu(
-    "Friends",
-    FontAwesomeIcons.user,
+    "Notification",
+    "Notification.png",
+  ),
+  HomeModelBottomMenu(
+    "Profile",
+    "Profile.png",
   ),
 ];

@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:kajiansunnah/bloc/splash_check/bloc.dart';
 import 'package:kajiansunnah/injection_container.dart' as di;
+import 'package:kajiansunnah/routes/app_routes.dart';
+import 'package:kajiansunnah/screens/home_page.dart';
 import 'package:kajiansunnah/screens/welcome_screen.dart';
 import 'package:kajiansunnah/services/size_service.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
@@ -31,11 +33,12 @@ class splash_screen extends StatelessWidget {
         body: BlocConsumer<SplashCheckBloc, SplashCheckBlocState>(
             listener: (context, state) {
           if (state is SplashCheckOnSuccess) {
-            // Future.delayed(const Duration(milliseconds: 500))
-            //     .then((value) => Get.offNamed(Routes.homeMenuRoute));
             if (state.toWelcome) {
               Future.delayed(const Duration(milliseconds: 500))
                   .then((value) => Get.off(welcome_screen()));
+            } else {
+              Future.delayed(const Duration(milliseconds: 500))
+                  .then((value) => Get.offNamed(Routes.homeMenuRoute));
             }
           }
         }, builder: (BuildContext context, state) {

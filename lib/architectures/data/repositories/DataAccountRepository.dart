@@ -27,4 +27,10 @@ class DataAccountRepository implements AccountRepository {
   Future<void> register(UserRegistration userRegistration) async {
     await AccountRemoteDataSource.register(userRegistration);
   }
+
+  @override
+  Future<UserAccount> getLoggedInUser() async {
+    final userAccount = await AccountLocalDataSource.getLoggedInUser();
+    return userAccount;
+  }
 }

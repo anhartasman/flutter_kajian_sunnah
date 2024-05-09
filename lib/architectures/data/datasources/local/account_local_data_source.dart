@@ -12,4 +12,11 @@ class AccountLocalDataSource {
     await prefs.setString("userAccount", userAccount.toJson());
     //end of getlogin
   }
+
+  static Future<UserAccount> getLoggedInUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userJson = prefs.getString("userAccount")!;
+    return UserAccount.fromJson(userJson);
+    //end of getLoggedInUser
+  }
 }
