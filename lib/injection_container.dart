@@ -3,6 +3,7 @@ import 'package:kajiansunnah/architectures/domain/usecases/GetLoggedInUserUseCas
 import 'package:kajiansunnah/architectures/domain/usecases/UserLoginUseCase.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kajiansunnah/architectures/data/repositories/DataAccountRepository.dart';
+import 'package:kajiansunnah/architectures/domain/usecases/UserLogoutUseCase.dart';
 import 'package:kajiansunnah/architectures/domain/usecases/UserRegisterUseCase.dart';
 import 'package:kajiansunnah/bloc/home_nav/bloc.dart';
 import 'package:kajiansunnah/bloc/splash_check/splash_check_bloc.dart';
@@ -17,6 +18,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UserLoginUseCase(sl()));
   sl.registerLazySingleton(() => UserRegisterUseCase(sl()));
   sl.registerLazySingleton(() => GetLoggedInUserUseCase(sl()));
+  sl.registerLazySingleton(() => UserLogoutUseCase(sl()));
 
   // Repository
 
@@ -25,7 +27,9 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-    () => HomeNavBloc(),
+    () => HomeNavBloc(
+      userLogoutUseCase: sl(),
+    ),
   );
 
   sl.registerFactory(

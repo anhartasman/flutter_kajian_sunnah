@@ -15,5 +15,8 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<void> logout() async {}
+  Future<void> logout() async {
+    isLoggedIn = false;
+    theUser = null;
+  }
 }

@@ -65,4 +65,28 @@ class AccountRemoteDataSource {
 
     //end of register
   }
+
+  static Future<void> logout() async {
+    const String nama_api = "Logout User";
+    final apiURL = ServiceAPI.apiURL + "/auth/logout";
+
+    print("API ${nama_api}");
+    print("URL ${apiURL}");
+
+    Map<String, dynamic> postPure = {};
+
+    final responsePost = await ServiceAPI.postAPI(
+      namaAPI: nama_api,
+      URL: apiURL,
+      pureBodyPost: postPure,
+      public: false,
+    );
+
+    final responAPI = responsePost;
+    if (responAPI["status"] != "success") {
+      throw (responAPI["message"].toString());
+    }
+
+    //end of logout
+  }
 }

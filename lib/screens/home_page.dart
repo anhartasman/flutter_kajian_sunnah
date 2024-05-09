@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kajiansunnah/bloc/home_nav/bloc.dart';
 import 'package:kajiansunnah/helpers/resizer/fetch_pixels.dart';
 import 'package:kajiansunnah/injection_container.dart' as di;
+import 'package:kajiansunnah/routes/app_routes.dart';
 import 'package:kajiansunnah/screens/home_screen.dart';
 import 'package:kajiansunnah/services/auth_service.dart';
 import 'package:kajiansunnah/widgets/DrawerContent.dart';
@@ -31,6 +32,9 @@ class HomePage extends StatelessWidget {
               if (state.openDrawer) {
                 debugPrint("dengar buka drawer");
                 scaffoldKey.currentState?.openDrawer();
+              }
+              if (state.logout) {
+                Get.offNamed(Routes.homeRoute);
               }
             }, builder: (BuildContext context, state) {
               if (state.menuActive == 0 || state.menuActive == -1) {

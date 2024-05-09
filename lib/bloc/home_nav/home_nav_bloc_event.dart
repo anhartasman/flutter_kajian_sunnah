@@ -10,3 +10,5 @@ class HomeNavBlocChange extends HomeNavBlocEvent {
 class HomeNavOpenDrawer extends HomeNavBlocEvent {}
 
 class HomeNavCloseDrawer extends HomeNavBlocEvent {}
+
+class HomeNavLogout extends HomeNavBlocEvent {}

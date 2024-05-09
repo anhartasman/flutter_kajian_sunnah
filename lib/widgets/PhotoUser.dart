@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:kajiansunnah/architectures/domain/entities/UserAccount.dart';
+import 'package:kajiansunnah/helpers/resizer/fetch_pixels.dart';
 import 'package:kajiansunnah/services/auth_service.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/widgets/cache_image_network.dart';
@@ -34,9 +35,17 @@ class PhotoUser extends StatelessWidget {
     debugPrint("hurufPertama $hurufPertama");
     debugPrint("hurufKedua $hurufKedua");
     final namaPendek = hurufPertama + hurufKedua;
+    if (photoURL.isNotEmpty) {
+      return CircleAvatar(
+        radius: FetchPixels.getPixelWidth(40),
+        backgroundImage: NetworkImage(
+            "https://images.unsplash.com/photo-1597466765990-64ad1c35dafc"),
+      );
+    }
     return ClipOval(
       child: Container(
-        padding: EdgeInsets.all(10.0),
+        width: FetchPixels.getPixelWidth(40),
+        height: FetchPixels.getPixelHeight(40),
         decoration: BoxDecoration(color: colorBg, shape: BoxShape.circle),
         child: Center(
           child: Text(

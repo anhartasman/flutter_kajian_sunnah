@@ -15,7 +15,7 @@ class ButtonMain extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(6)),
-        color: Warna.hijau,
+        color: Warna.warnaUtama,
       ),
       child: Center(
         child: Text(tulisan,

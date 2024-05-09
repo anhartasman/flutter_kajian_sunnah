@@ -19,4 +19,10 @@ class AccountLocalDataSource {
     return UserAccount.fromJson(userJson);
     //end of getLoggedInUser
   }
+
+  static Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove("userToken");
+    await prefs.remove("userAccount");
+  }
 }

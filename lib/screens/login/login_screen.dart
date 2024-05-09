@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:kajiansunnah/bloc/user_login/bloc.dart';
 import 'package:kajiansunnah/bloc/user_login/user_login_bloc.dart';
 import 'package:kajiansunnah/const/const_text.dart';
+import 'package:kajiansunnah/routes/app_routes.dart';
 import 'package:kajiansunnah/screens/home_page.dart';
 import 'package:kajiansunnah/screens/login/login_form.dart';
 import 'package:kajiansunnah/screens/register/register_screen.dart';
@@ -42,7 +43,7 @@ class login_screen extends StatelessWidget {
             child: BlocConsumer<UserLoginBloc, UserLoginBlocState>(
                 listener: (context, state) {
               if (state is UserLoginBlocStateOnSuccess) {
-                Get.offAll(HomePage());
+                Get.offAllNamed(Routes.homeRoute);
               }
             }, builder: (BuildContext context, state) {
               if (state is UserLoginBlocStateOnStarted) {

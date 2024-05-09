@@ -17,13 +17,16 @@ class ButtonPutih extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(6)),
         color: Colors.white,
         border: Border.all(
-          color: Warna.hijau,
+          color: Warna.warnaUtama,
         ),
       ),
       child: Center(
         child: Text(tulisan,
             style: TextStyle(
-                fontSize: 16, color: Warna.hijau, fontWeight: FontWeight.bold)),
+              fontSize: 16,
+              color: Warna.warnaUtama,
+              fontWeight: FontWeight.bold,
+            )),
       ),
     );
   }

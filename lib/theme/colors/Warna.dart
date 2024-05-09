@@ -4,7 +4,7 @@ class Warna {
   static const Color warnaUtama = Color(0xFF2F80ED);
   static const Color unguMuda = Color(0xFFcccae8);
   static const Color unguTua = Color(0xFF63508D);
-  static const Color orange = Color(0xFFFC9011);
+  static const Color orange = Color(0xFFFF6868);
   static const Color orangeTua = Color(0xFFFC6011);
   static const Color merah = Color(0xFFFC1D38);
   static const Color icon = Color(0xFFf6f6f2);

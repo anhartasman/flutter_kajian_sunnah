@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:kajiansunnah/architectures/data/datasources/local/account_local_data_source.dart';
 import 'package:kajiansunnah/architectures/data/datasources/remote/account_remote_data_source.dart';
 import 'package:kajiansunnah/architectures/domain/entities/UserAccount.dart';
@@ -31,6 +32,13 @@ class DataAccountRepository implements AccountRepository {
   @override
   Future<UserAccount> getLoggedInUser() async {
     final userAccount = await AccountLocalDataSource.getLoggedInUser();
+    debugPrint("Logged in user: " + userAccount.toJson());
     return userAccount;
+  }
+
+  @override
+  Future<void> logout() async {
+    await AccountRemoteDataSource.logout();
+    await AccountLocalDataSource.logout();
   }
 }
