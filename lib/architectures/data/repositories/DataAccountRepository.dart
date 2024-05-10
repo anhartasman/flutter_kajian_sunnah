@@ -38,7 +38,9 @@ class DataAccountRepository implements AccountRepository {
 
   @override
   Future<void> logout() async {
-    await AccountRemoteDataSource.logout();
-    await AccountLocalDataSource.logout();
+    try {
+      await AccountRemoteDataSource.logout();
+    } catch (e) {}
+    AccountLocalDataSource.logout();
   }
 }
