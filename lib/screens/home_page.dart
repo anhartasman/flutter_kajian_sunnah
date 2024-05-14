@@ -25,42 +25,52 @@ class HomePage extends StatelessWidget {
         // backgroundColor: LightColors.kLightYellow,
         key: scaffoldKey,
         backgroundColor: Colors.white,
-        body: Stack(
+        body: Column(
           children: [
-            BlocConsumer<HomeNavBloc, HomeNavBlocState>(
-                listener: (context, state) {
-              if (state.openDrawer) {
-                debugPrint("dengar buka drawer");
-                scaffoldKey.currentState?.openDrawer();
-              }
-              if (state.logout) {
-                Get.offNamed(Routes.homeRoute);
-              }
-            }, builder: (BuildContext context, state) {
-              if (state.menuActive == 0 || state.menuActive == -1) {
-                return home_screen();
-              }
-              if (state.menuActive == 1) {
-                return WillPopScope(
-                  onWillPop: () {
-                    BlocProvider.of<HomeNavBloc>(context)
-                        .add(HomeNavBlocChange(0));
-                    return Future.value(false);
-                  },
-                  child: Container(key: ValueKey("all")),
-                );
-              }
-              if (state.menuActive == 2) {
-                return WillPopScope(
-                  onWillPop: () {
-                    BlocProvider.of<HomeNavBloc>(context)
-                        .add(HomeNavBlocChange(0));
-                    return Future.value(false);
-                  },
-                  child: Container(key: ValueKey("favourite")),
-                );
-              }
-              if (state.menuActive == 3) {
+            Expanded(
+              child: BlocConsumer<HomeNavBloc, HomeNavBlocState>(
+                  listener: (context, state) {
+                if (state.openDrawer) {
+                  debugPrint("dengar buka drawer");
+                  scaffoldKey.currentState?.openDrawer();
+                }
+                if (state.logout) {
+                  Get.offNamed(Routes.homeRoute);
+                }
+              }, builder: (BuildContext context, state) {
+                if (state.menuActive == 0 || state.menuActive == -1) {
+                  return home_screen();
+                }
+                if (state.menuActive == 1) {
+                  return WillPopScope(
+                    onWillPop: () {
+                      BlocProvider.of<HomeNavBloc>(context)
+                          .add(HomeNavBlocChange(0));
+                      return Future.value(false);
+                    },
+                    child: Container(key: ValueKey("all")),
+                  );
+                }
+                if (state.menuActive == 2) {
+                  return WillPopScope(
+                    onWillPop: () {
+                      BlocProvider.of<HomeNavBloc>(context)
+                          .add(HomeNavBlocChange(0));
+                      return Future.value(false);
+                    },
+                    child: Container(key: ValueKey("favourite")),
+                  );
+                }
+                if (state.menuActive == 3) {
+                  return WillPopScope(
+                    onWillPop: () {
+                      BlocProvider.of<HomeNavBloc>(context)
+                          .add(HomeNavBlocChange(0));
+                      return Future.value(false);
+                    },
+                    child: Container(),
+                  );
+                }
                 return WillPopScope(
                   onWillPop: () {
                     BlocProvider.of<HomeNavBloc>(context)
@@ -69,22 +79,11 @@ class HomePage extends StatelessWidget {
                   },
                   child: Container(),
                 );
-              }
-              return WillPopScope(
-                onWillPop: () {
-                  BlocProvider.of<HomeNavBloc>(context)
-                      .add(HomeNavBlocChange(0));
-                  return Future.value(false);
-                },
-                child: Container(),
-              );
-            }),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: HomeNavBar(),
-              ),
+              }),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: HomeNavBar(),
             ),
           ],
         ),
