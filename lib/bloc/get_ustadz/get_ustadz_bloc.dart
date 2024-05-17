@@ -15,7 +15,8 @@ class GetUstadzProfileBloc
       if (event is GetUstadzProfileBlocStart) {
         emit(GetUstadzProfileBlocStateOnStarted());
         try {
-          final failureOrTrivia = await getUstadzProfileUseCase(NoParams());
+          final failureOrTrivia =
+              await getUstadzProfileUseCase(event.searchParam);
 
           final theData = await failureOrTrivia.first;
 

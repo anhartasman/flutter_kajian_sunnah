@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:kajiansunnah/architectures/data/dataparser/ParserPostTopic.dart';
 import 'package:kajiansunnah/architectures/data/dataparser/ParserPostUstadzProfile.dart';
 import 'package:kajiansunnah/architectures/domain/entities/PostTopic.dart';
+import 'package:kajiansunnah/architectures/domain/entities/SearchParam.dart';
 import 'package:kajiansunnah/architectures/domain/entities/UstadzProfile.dart';
 import 'package:kajiansunnah/services/service_api.dart';
 
@@ -42,7 +43,8 @@ class HomeRemoteDataSource {
     //end of getTopic
   }
 
-  static Future<List<UstadzProfile>> getUstadzProfile() async {
+  static Future<List<UstadzProfile>> getUstadzProfile(
+      SearchParam searchParam) async {
     const String nama_api = "getUstadzProfile";
     final apiURL =
         "${ServiceAPI.apiURL}/ustadz?limit=5&page=1&sort=-created_at";
@@ -50,7 +52,7 @@ class HomeRemoteDataSource {
     print("API ${nama_api}");
     print("URL ${apiURL}");
 
-    Map<String, dynamic> postPure = {};
+    Map<String, dynamic> postPure = searchParam.toMap();
 
     final responsePost = await ServiceAPI.getAPI(
       URL: apiURL,

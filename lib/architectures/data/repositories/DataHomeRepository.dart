@@ -1,5 +1,6 @@
 import 'package:kajiansunnah/architectures/data/datasources/remote/home_remote_data_source.dart';
 import 'package:kajiansunnah/architectures/domain/entities/PostTopic.dart';
+import 'package:kajiansunnah/architectures/domain/entities/SearchParam.dart';
 import 'package:kajiansunnah/architectures/domain/entities/UstadzProfile.dart';
 import 'package:kajiansunnah/architectures/domain/repositories/HomeRepository.dart';
 import 'package:logging/logging.dart';
@@ -22,8 +23,8 @@ class DataHomeRepository implements HomeRepository {
   }
 
   @override
-  Future<List<UstadzProfile>> getUstadzProfile() async {
-    final result = await HomeRemoteDataSource.getUstadzProfile();
+  Future<List<UstadzProfile>> getUstadzProfile(SearchParam searchParam) async {
+    final result = await HomeRemoteDataSource.getUstadzProfile(searchParam);
 
     return result;
   }

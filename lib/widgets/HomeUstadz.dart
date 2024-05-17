@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kajiansunnah/architectures/domain/entities/SearchParam.dart';
 import 'package:kajiansunnah/bloc/get_ustadz/bloc.dart';
 import 'package:kajiansunnah/injection_container.dart' as di;
 import 'package:kajiansunnah/widgets/UstadzItem.dart';
@@ -13,8 +14,8 @@ class HomeUstadz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<GetUstadzProfileBloc>(
-      create: (BuildContext context) =>
-          di.sl<GetUstadzProfileBloc>()..add(GetUstadzProfileBlocStart()),
+      create: (BuildContext context) => di.sl<GetUstadzProfileBloc>()
+        ..add(GetUstadzProfileBlocStart(SearchParam())),
       child: BlocConsumer<GetUstadzProfileBloc, GetUstadzProfileBlocState>(
           listener: (context, state) {},
           builder: (BuildContext context, state) {
