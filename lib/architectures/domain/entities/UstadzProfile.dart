@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class UstadzProfile {
-  final String id;
+  final int id;
   final String name;
   final String short_bio;
   final String description;
@@ -12,17 +12,8 @@ class UstadzProfile {
     required this.description,
   });
 
-  factory UstadzProfile.defaultValue() {
-    return const UstadzProfile(
-      id: "",
-      name: "",
-      short_bio: "",
-      description: "",
-    );
-  }
-
   UstadzProfile copyWith({
-    String? id,
+    int? id,
     String? name,
     String? short_bio,
     String? description,
@@ -46,7 +37,7 @@ class UstadzProfile {
 
   factory UstadzProfile.fromMap(Map<String, dynamic> map) {
     return UstadzProfile(
-      id: map['id'] ?? '',
+      id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
       short_bio: map['short_bio'] ?? '',
       description: map['description'] ?? '',

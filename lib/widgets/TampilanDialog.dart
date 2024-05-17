@@ -6,9 +6,9 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kajiansunnah/inject/MyAppSize.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:kajiansunnah/helpers/extensions/ext_double.dart';
-import 'package:kajiansunnah/services/size_service.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/theme/styles/text/poppins_style_text.dart';
 import 'package:kajiansunnah/widgets/ButtonMain.dart';
@@ -324,8 +324,7 @@ class __DialogSourceImageState extends State<_DialogSourceImage> {
 
   @override
   Widget build(BuildContext context) {
-    final sizeService = Get.find<SizeService>();
-    final double appWidth = sizeService.appWidth;
+    final double appWidth = MyAppSize().appWidth;
 
     return ClipRRect(
       borderRadius: BorderRadius.horizontal(
@@ -475,8 +474,7 @@ class __DialogPermissionCameraState extends State<_DialogPermissionCamera> {
 
   @override
   Widget build(BuildContext context) {
-    final sizeService = Get.find<SizeService>();
-    final double appWidth = sizeService.appWidth;
+    final double appWidth = MyAppSize().appWidth;
 
     return ClipRRect(
       borderRadius: BorderRadius.horizontal(

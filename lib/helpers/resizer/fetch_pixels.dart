@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kajiansunnah/services/size_service.dart';
+import 'package:kajiansunnah/inject/MyAppSize.dart';
 
 import '../device_util.dart';
 
@@ -11,9 +11,8 @@ class FetchPixels {
   static double height = 0;
 
   FetchPixels() {
-    final sizeService = Get.find<SizeService>();
-    width = sizeService.appWidth;
-    height = sizeService.appHeight;
+    width = MyAppSize().appWidth;
+    height = MyAppSize().appHeight;
   }
 
   static double getHeightPercentSize(double percent) {

@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:kajiansunnah/screens/home_page.dart';
 import 'package:kajiansunnah/services/auth_service.dart';
-import 'package:kajiansunnah/services/size_service.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/theme/colors/light_colors.dart';
 import 'package:kajiansunnah/routes/app_pages.dart';
@@ -24,7 +23,6 @@ void main() async {
     //   statusBarColor: Warna.warnaUtama, // status bar color
     // ));
     await Get.putAsync(() => AuthService().init());
-    await Get.putAsync(() => SizeService().init());
 
     return runApp(MyApp());
   });

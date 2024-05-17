@@ -102,7 +102,7 @@ class ServiceAPI {
       );
 
       if (responseDio.statusCode == 200) {
-        print("/// response request ///");
+        print("/// response request ${responseDio.realUri} ///");
         print(json.encode(responseDio.data));
         return responseDio.data;
       } else {

@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-class PostTopic {
+class PostCategory {
   final int id;
   final String name;
   final String description;
-  const PostTopic({
+  const PostCategory({
     required this.id,
     required this.name,
-    required this.description,
+    this.description = '',
   });
 
-  PostTopic copyWith({
+  PostCategory copyWith({
     int? id,
     String? name,
     String? description,
   }) {
-    return PostTopic(
+    return PostCategory(
       id: id ?? this.id,
       name: name ?? this.name,
       description: description ?? this.description,
@@ -30,8 +30,8 @@ class PostTopic {
     };
   }
 
-  factory PostTopic.fromMap(Map<String, dynamic> map) {
-    return PostTopic(
+  factory PostCategory.fromMap(Map<String, dynamic> map) {
+    return PostCategory(
       id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
       description: map['description'] ?? '',
@@ -40,18 +40,18 @@ class PostTopic {
 
   String toJson() => json.encode(toMap());
 
-  factory PostTopic.fromJson(String source) =>
-      PostTopic.fromMap(json.decode(source));
+  factory PostCategory.fromJson(String source) =>
+      PostCategory.fromMap(json.decode(source));
 
   @override
   String toString() =>
-      'PostTopic(id: $id, name: $name, description: $description)';
+      'PostCategory(id: $id, name: $name, description: $description)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is PostTopic &&
+    return other is PostCategory &&
         other.id == id &&
         other.name == name &&
         other.description == description;

@@ -1,24 +1,30 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 class SearchParam {
   final int limit;
   final int page;
   final String sort;
+  final Map<String, dynamic> filter;
   const SearchParam({
     this.limit = 5,
     this.page = 1,
     this.sort = '-created_at',
+    this.filter = const {},
   });
 
   SearchParam copyWith({
     int? limit,
     int? page,
     String? sort,
+    Map<String, dynamic>? filter,
   }) {
     return SearchParam(
       limit: limit ?? this.limit,
       page: page ?? this.page,
       sort: sort ?? this.sort,
+      filter: filter ?? this.filter,
     );
   }
 
@@ -27,6 +33,7 @@ class SearchParam {
       'limit': limit,
       'page': page,
       'sort': sort,
+      'filter': filter,
     };
   }
 
@@ -35,6 +42,7 @@ class SearchParam {
       limit: map['limit']?.toInt() ?? 0,
       page: map['page']?.toInt() ?? 0,
       sort: map['sort'] ?? '',
+      filter: Map<String, dynamic>.from(map['filter']),
     );
   }
 
@@ -44,7 +52,9 @@ class SearchParam {
       SearchParam.fromMap(json.decode(source));
 
   @override
-  String toString() => 'SearchParam(limit: $limit, page: $page, sort: $sort)';
+  String toString() {
+    return 'SearchParam(limit: $limit, page: $page, sort: $sort, filter: $filter)';
+  }
 
   @override
   bool operator ==(Object other) {
@@ -53,9 +63,12 @@ class SearchParam {
     return other is SearchParam &&
         other.limit == limit &&
         other.page == page &&
-        other.sort == sort;
+        other.sort == sort &&
+        mapEquals(other.filter, filter);
   }
 
   @override
-  int get hashCode => limit.hashCode ^ page.hashCode ^ sort.hashCode;
+  int get hashCode {
+    return limit.hashCode ^ page.hashCode ^ sort.hashCode ^ filter.hashCode;
+  }
 }

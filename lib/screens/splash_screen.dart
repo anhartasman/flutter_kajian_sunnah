@@ -5,11 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:kajiansunnah/bloc/splash_check/bloc.dart';
+import 'package:kajiansunnah/inject/MyAppSize.dart';
 import 'package:kajiansunnah/injection_container.dart' as di;
 import 'package:kajiansunnah/routes/app_routes.dart';
 import 'package:kajiansunnah/screens/home_page.dart';
 import 'package:kajiansunnah/screens/welcome_screen.dart';
-import 'package:kajiansunnah/services/size_service.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/widgets/SplashContent.dart';
 
@@ -21,8 +21,9 @@ class splash_screen extends StatelessWidget {
     final double appWidth = MediaQuery.of(context).size.width;
     final double appHeight = MediaQuery.of(context).size.height;
 
-    final sizeService = Get.find<SizeService>();
-    sizeService.setAppSize(appWidth, appHeight);
+    final sizeService = MyAppSize();
+    sizeService.setMyHeight = appHeight;
+    sizeService.setMyWidth = appWidth;
     // var statusBarHeight = MediaQuery.of(context).viewPadding.top;
     return BlocProvider<SplashCheckBloc>(
       create: (BuildContext context) =>

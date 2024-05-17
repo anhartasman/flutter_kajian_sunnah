@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kajiansunnah/architectures/domain/entities/PostCategory.dart';
 import 'package:kajiansunnah/theme/styles/text/opensans_style_text.dart';
+import 'package:kajiansunnah/widgets/HomeContent.dart';
 import 'package:kajiansunnah/widgets/HomeHeader.dart';
 import 'package:kajiansunnah/widgets/HomeTopic.dart';
 import 'package:kajiansunnah/widgets/HomeUstadz.dart';
@@ -33,28 +35,29 @@ class home_screen extends StatelessWidget {
                     child: HomeTopic(),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16.0,
-                      top: 24.0,
-                      bottom: 16,
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          left: BorderSide(
-                              width: 2.0, color: Colors.lightBlue.shade600),
-                        ),
-                      ),
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        "Mengenal Ustadz",
-                        style: OpenSansSemiBold18,
-                      ),
-                    ),
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: HomeUstadz(),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0),
-                    child: HomeUstadz(),
+                    child: HomeContent(PostCategory(
+                      id: 1,
+                      name: "Agenda",
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: HomeContent(PostCategory(
+                      id: 2,
+                      name: "Artikel",
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: HomeContent(PostCategory(
+                      id: 3,
+                      name: "Pengumuman",
+                    )),
                   ),
                   SizedBox(
                     height: 32,

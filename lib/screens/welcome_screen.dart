@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:kajiansunnah/const/const_text.dart';
 import 'package:kajiansunnah/screens/login/login_screen.dart';
 import 'package:kajiansunnah/screens/register/register_screen.dart';
-import 'package:kajiansunnah/services/size_service.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/theme/styles/text/opensans_style_text.dart';
 import 'package:kajiansunnah/theme/styles/text/prozalibre_style_text.dart';

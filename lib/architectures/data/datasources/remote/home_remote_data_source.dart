@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
-import 'package:kajiansunnah/architectures/data/dataparser/ParserPostTopic.dart';
-import 'package:kajiansunnah/architectures/data/dataparser/ParserPostUstadzProfile.dart';
 import 'package:kajiansunnah/architectures/domain/entities/PostTopic.dart';
 import 'package:kajiansunnah/architectures/domain/entities/SearchParam.dart';
 import 'package:kajiansunnah/architectures/domain/entities/UstadzProfile.dart';
@@ -34,7 +32,7 @@ class HomeRemoteDataSource {
 
     for (final tag in tagsMap) {
       debugPrint("tag parsing: ${tag}");
-      result.add(ParserPostTopic.fromAPIResult(tag));
+      result.add(PostTopic.fromMap(tag));
     }
 
     debugPrint("get result: ${result.length}");
@@ -46,8 +44,7 @@ class HomeRemoteDataSource {
   static Future<List<UstadzProfile>> getUstadzProfile(
       SearchParam searchParam) async {
     const String nama_api = "getUstadzProfile";
-    final apiURL =
-        "${ServiceAPI.apiURL}/ustadz?limit=5&page=1&sort=-created_at";
+    final apiURL = "${ServiceAPI.apiURL}/ustadz";
 
     print("API ${nama_api}");
     print("URL ${apiURL}");
@@ -70,7 +67,7 @@ class HomeRemoteDataSource {
 
     for (final data in dataMap) {
       debugPrint("data parsing: ${data}");
-      result.add(ParserUstadzProfile.fromAPIResult(data));
+      result.add(UstadzProfile.fromMap(data));
     }
 
     debugPrint("get result: ${result.length}");

@@ -100,7 +100,7 @@ class UstadzItem extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

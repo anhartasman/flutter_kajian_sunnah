@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kajiansunnah/architectures/domain/entities/PostCategory.dart';
 import 'package:kajiansunnah/architectures/domain/entities/SearchParam.dart';
+import 'package:kajiansunnah/bloc/get_post_content/bloc.dart';
 import 'package:kajiansunnah/bloc/get_ustadz/bloc.dart';
 import 'package:kajiansunnah/injection_container.dart' as di;
+import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/theme/styles/text/opensans_style_text.dart';
+import 'package:kajiansunnah/widgets/PostItem.dart';
 import 'package:kajiansunnah/widgets/UstadzItem.dart';
 import 'package:kajiansunnah/widgets/UstadzItem.dart';
 import 'package:shimmer/shimmer.dart';
 
-class HomeUstadz extends StatelessWidget {
-  const HomeUstadz({Key? key}) : super(key: key);
+class HomeContent extends StatelessWidget {
+  final PostCategory postCategory;
+  const HomeContent(this.postCategory, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +33,37 @@ class HomeUstadz extends StatelessWidget {
                 left: BorderSide(width: 2.0, color: Colors.lightBlue.shade600),
               ),
             ),
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(
-              "Mengenal Ustadz",
-              style: OpenSansSemiBold18,
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              right: 16,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    postCategory.name,
+                    style: OpenSansSemiBold18,
+                  ),
+                ),
+                Text(
+                  "Lihat semua >",
+                  style: OpenSansSemiBold12.copyWith(
+                    color: Warna.warnaUtama,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
-        BlocProvider<GetUstadzProfileBloc>(
-          create: (BuildContext context) => di.sl<GetUstadzProfileBloc>()
-            ..add(GetUstadzProfileBlocStart(SearchParam())),
-          child: BlocConsumer<GetUstadzProfileBloc, GetUstadzProfileBlocState>(
+        BlocProvider<GetPostContentBloc>(
+          create: (BuildContext context) => di.sl<GetPostContentBloc>()
+            ..add(GetPostContentBlocStart(SearchParam(filter: {
+              "category_id": postCategory.id,
+            }))),
+          child: BlocConsumer<GetPostContentBloc, GetPostContentBlocState>(
               listener: (context, state) {},
               builder: (BuildContext context, state) {
-                if (state is GetUstadzProfileBlocStateOnStarted) {
+                if (state is GetPostContentBlocStateOnStarted) {
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -63,15 +85,16 @@ class HomeUstadz extends StatelessWidget {
                     ),
                   );
                 }
-                if (state is GetUstadzProfileBlocStateOnSuccess) {
+                if (state is GetPostContentBlocStateOnSuccess) {
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: List.generate(
                           state.result.length,
                           (index) => Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: UstadzItem(
+                                child: PostItem(
                                   state.result[index],
                                 ),
                               )),

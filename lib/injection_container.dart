@@ -1,7 +1,10 @@
 import 'package:kajiansunnah/architectures/data/repositories/DataHomeRepository.dart';
+import 'package:kajiansunnah/architectures/data/repositories/DataPostRepository.dart';
 import 'package:kajiansunnah/architectures/domain/repositories/AccountRepository.dart';
 import 'package:kajiansunnah/architectures/domain/repositories/HomeRepository.dart';
+import 'package:kajiansunnah/architectures/domain/repositories/PostRepository.dart';
 import 'package:kajiansunnah/architectures/domain/usecases/GetLoggedInUserUseCase.dart';
+import 'package:kajiansunnah/architectures/domain/usecases/GetPostContentUseCase.dart';
 import 'package:kajiansunnah/architectures/domain/usecases/GetTopicUseCase.dart';
 import 'package:kajiansunnah/architectures/domain/usecases/GetUstadzProfileUseCase.dart';
 import 'package:kajiansunnah/architectures/domain/usecases/UserLoginUseCase.dart';
@@ -9,6 +12,7 @@ import 'package:get_it/get_it.dart';
 import 'package:kajiansunnah/architectures/data/repositories/DataAccountRepository.dart';
 import 'package:kajiansunnah/architectures/domain/usecases/UserLogoutUseCase.dart';
 import 'package:kajiansunnah/architectures/domain/usecases/UserRegisterUseCase.dart';
+import 'package:kajiansunnah/bloc/get_post_content/bloc.dart';
 import 'package:kajiansunnah/bloc/get_topic/bloc.dart';
 import 'package:kajiansunnah/bloc/get_ustadz/bloc.dart';
 import 'package:kajiansunnah/bloc/home_nav/bloc.dart';
@@ -27,6 +31,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UserLogoutUseCase(sl()));
   sl.registerLazySingleton(() => GetTopicUseCase(sl()));
   sl.registerLazySingleton(() => GetUstadzProfileUseCase(sl()));
+  sl.registerLazySingleton(() => GetPostContentUseCase(sl()));
 
   // Repository
 
@@ -35,6 +40,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<HomeRepository>(
     () => DataHomeRepository(),
+  );
+  sl.registerLazySingleton<PostRepository>(
+    () => DataPostRepository(),
   );
 
   sl.registerFactory(
@@ -70,6 +78,12 @@ Future<void> init() async {
   sl.registerFactory(
     () => GetUstadzProfileBloc(
       getUstadzProfileUseCase: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => GetPostContentBloc(
+      getPostContentUseCase: sl(),
     ),
   );
 }
