@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:kajiansunnah/architectures/domain/entities/PostCategory.dart';
 import 'package:kajiansunnah/architectures/domain/entities/SearchParam.dart';
 import 'package:kajiansunnah/bloc/get_post_content/bloc.dart';
 import 'package:kajiansunnah/bloc/get_ustadz/bloc.dart';
 import 'package:kajiansunnah/injection_container.dart' as di;
+import 'package:kajiansunnah/screens/search_screen.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/theme/styles/text/opensans_style_text.dart';
 import 'package:kajiansunnah/widgets/PostItem.dart';
@@ -45,10 +47,17 @@ class HomeContent extends StatelessWidget {
                     style: OpenSansSemiBold18,
                   ),
                 ),
-                Text(
-                  "Lihat semua >",
-                  style: OpenSansSemiBold12.copyWith(
-                    color: Warna.warnaUtama,
+                InkWell(
+                  onTap: () =>
+                      Get.to(search_screen(postCategory: postCategory)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Lihat semua >",
+                      style: OpenSansSemiBold12.copyWith(
+                        color: Warna.warnaUtama,
+                      ),
+                    ),
                   ),
                 ),
               ],

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:kajiansunnah/architectures/domain/entities/PostCategory.dart';
 import 'package:kajiansunnah/architectures/domain/entities/PostTopic.dart';
+import 'package:kajiansunnah/architectures/domain/entities/UstadzProfile.dart';
 
 class PostContent {
   final int id;
@@ -12,21 +13,22 @@ class PostContent {
   final String excerpt;
   final String content;
   final String status;
-  final String imageUrl;
-  final String viewCount;
-  final String likeCount;
-  final String dislikeCount;
-  final String bookmarkCount;
-  final String publishDate;
+  final String image_url;
+  final String view_count;
+  final String like_count;
+  final String dislike_count;
+  final String bookmark_count;
+  final String publish_date;
   final PostCategory category;
   final PostTopic topic;
   final List<String> tags;
-  final String createdBy;
-  final String updatedBy;
-  final String createdAt;
-  final String updatedAt;
-  final String createdAtAgo;
-  final String updatedAtAgo;
+  final List<UstadzProfile> ustadzs;
+  final String created_by;
+  final String updated_by;
+  final String created_at;
+  final String updated_at;
+  final String created_at_ago;
+  final String updated_at_ago;
   const PostContent({
     required this.id,
     this.title = '',
@@ -34,21 +36,22 @@ class PostContent {
     this.excerpt = '',
     this.content = '',
     this.status = '',
-    this.imageUrl = '',
-    this.viewCount = '',
-    this.likeCount = '',
-    this.dislikeCount = '',
-    this.bookmarkCount = '',
-    this.publishDate = '',
+    this.image_url = '',
+    this.view_count = '',
+    this.like_count = '',
+    this.dislike_count = '',
+    this.bookmark_count = '',
+    this.publish_date = '',
     required this.category,
     required this.topic,
     this.tags = const [],
-    this.createdBy = '',
-    this.updatedBy = '',
-    this.createdAt = '',
-    this.updatedAt = '',
-    this.createdAtAgo = '',
-    this.updatedAtAgo = '',
+    this.ustadzs = const [],
+    this.created_by = '',
+    this.updated_by = '',
+    this.created_at = '',
+    this.updated_at = '',
+    this.created_at_ago = '',
+    this.updated_at_ago = '',
   });
 
   PostContent copyWith({
@@ -58,21 +61,22 @@ class PostContent {
     String? excerpt,
     String? content,
     String? status,
-    String? imageUrl,
-    String? viewCount,
-    String? likeCount,
-    String? dislikeCount,
-    String? bookmarkCount,
-    String? publishDate,
+    String? image_url,
+    String? view_count,
+    String? like_count,
+    String? dislike_count,
+    String? bookmark_count,
+    String? publish_date,
     PostCategory? category,
     PostTopic? topic,
     List<String>? tags,
-    String? createdBy,
-    String? updatedBy,
-    String? createdAt,
-    String? updatedAt,
-    String? createdAtAgo,
-    String? updatedAtAgo,
+    List<UstadzProfile>? ustadzs,
+    String? created_by,
+    String? updated_by,
+    String? created_at,
+    String? updated_at,
+    String? created_at_ago,
+    String? updated_at_ago,
   }) {
     return PostContent(
       id: id ?? this.id,
@@ -81,21 +85,22 @@ class PostContent {
       excerpt: excerpt ?? this.excerpt,
       content: content ?? this.content,
       status: status ?? this.status,
-      imageUrl: imageUrl ?? this.imageUrl,
-      viewCount: viewCount ?? this.viewCount,
-      likeCount: likeCount ?? this.likeCount,
-      dislikeCount: dislikeCount ?? this.dislikeCount,
-      bookmarkCount: bookmarkCount ?? this.bookmarkCount,
-      publishDate: publishDate ?? this.publishDate,
+      image_url: image_url ?? this.image_url,
+      view_count: view_count ?? this.view_count,
+      like_count: like_count ?? this.like_count,
+      dislike_count: dislike_count ?? this.dislike_count,
+      bookmark_count: bookmark_count ?? this.bookmark_count,
+      publish_date: publish_date ?? this.publish_date,
       category: category ?? this.category,
       topic: topic ?? this.topic,
       tags: tags ?? this.tags,
-      createdBy: createdBy ?? this.createdBy,
-      updatedBy: updatedBy ?? this.updatedBy,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      createdAtAgo: createdAtAgo ?? this.createdAtAgo,
-      updatedAtAgo: updatedAtAgo ?? this.updatedAtAgo,
+      ustadzs: ustadzs ?? this.ustadzs,
+      created_by: created_by ?? this.created_by,
+      updated_by: updated_by ?? this.updated_by,
+      created_at: created_at ?? this.created_at,
+      updated_at: updated_at ?? this.updated_at,
+      created_at_ago: created_at_ago ?? this.created_at_ago,
+      updated_at_ago: updated_at_ago ?? this.updated_at_ago,
     );
   }
 
@@ -107,21 +112,22 @@ class PostContent {
       'excerpt': excerpt,
       'content': content,
       'status': status,
-      'imageUrl': imageUrl,
-      'viewCount': viewCount,
-      'likeCount': likeCount,
-      'dislikeCount': dislikeCount,
-      'bookmarkCount': bookmarkCount,
-      'publishDate': publishDate,
+      'image_url': image_url,
+      'view_count': view_count,
+      'like_count': like_count,
+      'dislike_count': dislike_count,
+      'bookmark_count': bookmark_count,
+      'publish_date': publish_date,
       'category': category.toMap(),
       'topic': topic.toMap(),
       'tags': tags,
-      'createdBy': createdBy,
-      'updatedBy': updatedBy,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
-      'createdAtAgo': createdAtAgo,
-      'updatedAtAgo': updatedAtAgo,
+      'ustadzs': ustadzs.map((x) => x.toMap()).toList(),
+      'created_by': created_by,
+      'updated_by': updated_by,
+      'created_at': created_at,
+      'updated_at': updated_at,
+      'created_at_ago': created_at_ago,
+      'updated_at_ago': updated_at_ago,
     };
   }
 
@@ -133,21 +139,23 @@ class PostContent {
       excerpt: map['excerpt'] ?? '',
       content: map['content'] ?? '',
       status: map['status'] ?? '',
-      imageUrl: map['imageUrl'] ?? '',
-      viewCount: map['viewCount'] ?? '',
-      likeCount: map['likeCount'] ?? '',
-      dislikeCount: map['dislikeCount'] ?? '',
-      bookmarkCount: map['bookmarkCount'] ?? '',
-      publishDate: map['publishDate'] ?? '',
+      image_url: map['image_url'] ?? '',
+      view_count: map['view_count'] ?? '',
+      like_count: map['like_count'] ?? '',
+      dislike_count: map['dislike_count'] ?? '',
+      bookmark_count: map['bookmark_count'] ?? '',
+      publish_date: map['publish_date'] ?? '',
       category: PostCategory.fromMap(map['category']),
       topic: PostTopic.fromMap(map['topic']),
       tags: List<String>.from(map['tags']),
-      createdBy: map['createdBy'] ?? '',
-      updatedBy: map['updatedBy'] ?? '',
-      createdAt: map['createdAt'] ?? '',
-      updatedAt: map['updatedAt'] ?? '',
-      createdAtAgo: map['createdAtAgo'] ?? '',
-      updatedAtAgo: map['updatedAtAgo'] ?? '',
+      ustadzs: List<UstadzProfile>.from(
+          map['ustadzs']?.map((x) => UstadzProfile.fromMap(x))),
+      created_by: map['created_by'] ?? '',
+      updated_by: map['updated_by'] ?? '',
+      created_at: map['created_at'] ?? '',
+      updated_at: map['updated_at'] ?? '',
+      created_at_ago: map['created_at_ago'] ?? '',
+      updated_at_ago: map['updated_at_ago'] ?? '',
     );
   }
 
@@ -158,7 +166,7 @@ class PostContent {
 
   @override
   String toString() {
-    return 'PostContent(id: $id, title: $title, slug: $slug, excerpt: $excerpt, content: $content, status: $status, imageUrl: $imageUrl, viewCount: $viewCount, likeCount: $likeCount, dislikeCount: $dislikeCount, bookmarkCount: $bookmarkCount, publishDate: $publishDate, category: $category, topic: $topic, tags: $tags, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt, createdAtAgo: $createdAtAgo, updatedAtAgo: $updatedAtAgo)';
+    return 'PostContent(id: $id, title: $title, slug: $slug, excerpt: $excerpt, content: $content, status: $status, image_url: $image_url, view_count: $view_count, like_count: $like_count, dislike_count: $dislike_count, bookmark_count: $bookmark_count, publish_date: $publish_date, category: $category, topic: $topic, tags: $tags, ustadzs: $ustadzs, created_by: $created_by, updated_by: $updated_by, created_at: $created_at, updated_at: $updated_at, created_at_ago: $created_at_ago, updated_at_ago: $updated_at_ago)';
   }
 
   @override
@@ -172,21 +180,22 @@ class PostContent {
         other.excerpt == excerpt &&
         other.content == content &&
         other.status == status &&
-        other.imageUrl == imageUrl &&
-        other.viewCount == viewCount &&
-        other.likeCount == likeCount &&
-        other.dislikeCount == dislikeCount &&
-        other.bookmarkCount == bookmarkCount &&
-        other.publishDate == publishDate &&
+        other.image_url == image_url &&
+        other.view_count == view_count &&
+        other.like_count == like_count &&
+        other.dislike_count == dislike_count &&
+        other.bookmark_count == bookmark_count &&
+        other.publish_date == publish_date &&
         other.category == category &&
         other.topic == topic &&
         listEquals(other.tags, tags) &&
-        other.createdBy == createdBy &&
-        other.updatedBy == updatedBy &&
-        other.createdAt == createdAt &&
-        other.updatedAt == updatedAt &&
-        other.createdAtAgo == createdAtAgo &&
-        other.updatedAtAgo == updatedAtAgo;
+        listEquals(other.ustadzs, ustadzs) &&
+        other.created_by == created_by &&
+        other.updated_by == updated_by &&
+        other.created_at == created_at &&
+        other.updated_at == updated_at &&
+        other.created_at_ago == created_at_ago &&
+        other.updated_at_ago == updated_at_ago;
   }
 
   @override
@@ -197,20 +206,21 @@ class PostContent {
         excerpt.hashCode ^
         content.hashCode ^
         status.hashCode ^
-        imageUrl.hashCode ^
-        viewCount.hashCode ^
-        likeCount.hashCode ^
-        dislikeCount.hashCode ^
-        bookmarkCount.hashCode ^
-        publishDate.hashCode ^
+        image_url.hashCode ^
+        view_count.hashCode ^
+        like_count.hashCode ^
+        dislike_count.hashCode ^
+        bookmark_count.hashCode ^
+        publish_date.hashCode ^
         category.hashCode ^
         topic.hashCode ^
         tags.hashCode ^
-        createdBy.hashCode ^
-        updatedBy.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode ^
-        createdAtAgo.hashCode ^
-        updatedAtAgo.hashCode;
+        ustadzs.hashCode ^
+        created_by.hashCode ^
+        updated_by.hashCode ^
+        created_at.hashCode ^
+        updated_at.hashCode ^
+        created_at_ago.hashCode ^
+        updated_at_ago.hashCode;
   }
 }

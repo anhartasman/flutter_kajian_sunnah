@@ -17,7 +17,10 @@ class home_screen extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          PageBar("Kajian Sunnah"),
+          const PageBar(
+            "Kajian Sunnah",
+            homePage: true,
+          ),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
