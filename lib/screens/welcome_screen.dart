@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:kajiansunnah/const/const_text.dart';
+import 'package:kajiansunnah/routes/app_routes.dart';
 import 'package:kajiansunnah/screens/login/login_screen.dart';
 import 'package:kajiansunnah/screens/register/register_screen.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
@@ -104,12 +105,15 @@ class welcome_screen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 40, top: 24.0),
-                child: Text(
-                  "Continue without sign in",
-                  style: OpenSansSemiBold14.copyWith(
-                    color: Colors.white,
+                child: InkWell(
+                  onTap: () => Get.toNamed(Routes.homeMenuRoute),
+                  child: Text(
+                    "Continue without sign in",
+                    style: OpenSansSemiBold14.copyWith(
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ],
