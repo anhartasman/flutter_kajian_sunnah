@@ -1,12 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kajiansunnah/architectures/domain/entities/PostCategory.dart';
+import 'package:kajiansunnah/architectures/domain/entities/PostContent.dart';
 import 'package:kajiansunnah/architectures/domain/entities/SearchParam.dart';
 import 'package:kajiansunnah/bloc/get_post_content/bloc.dart';
 import 'package:kajiansunnah/injection_container.dart' as di;
+import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/theme/styles/text/opensans_style_text.dart';
+import 'package:kajiansunnah/widgets/ListShimmer.dart';
 import 'package:kajiansunnah/widgets/PostItem.dart';
 import 'package:kajiansunnah/widgets/reusables/ReusableWidget.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:shimmer/shimmer.dart';
 
 class search_screen extends StatelessWidget {
@@ -31,7 +37,7 @@ class search_screen extends StatelessWidget {
         child: BlocProvider<GetPostContentBloc>(
           create: (BuildContext context) => di.sl<GetPostContentBloc>()
             ..add(GetPostContentBlocStart(SearchParam(
-              limit: 100,
+              limit: 6,
               filter: {
                 "category_id": postCategory == null ? null : postCategory!.id,
                 "search": keyword,
@@ -52,83 +58,133 @@ class search_screen extends StatelessWidget {
                         : postCategory!.id.toString()),
               ),
               Expanded(
-                child: BlocConsumer<GetPostContentBloc,
-                        GetPostContentBlocState>(
-                    listener: (context, state) {},
-                    builder: (BuildContext context, state) {
-                      if (state is GetPostContentBlocStateOnStarted) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Shimmer.fromColors(
-                              baseColor: Colors.grey[300]!,
-                              highlightColor: Colors.grey[100]!,
-                              enabled: true,
-                              child: GridView.count(
-                                physics: new NeverScrollableScrollPhysics(),
-                                childAspectRatio: 1.1,
-                                shrinkWrap: true,
-                                crossAxisSpacing: 16,
-                                mainAxisSpacing: 16,
-                                crossAxisCount: 2,
-                                children: List.generate(9, (index) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey[100]!,
-                                            width: 0.5),
-                                        color: Colors.white),
-                                    padding: EdgeInsets.all(8),
-                                    width: 20,
-                                    height: 20,
-                                  );
-                                }),
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-                      if (state is GetPostContentBlocStateOnSuccess) {
-                        final jumBaris = (state.result.length / 2).ceil();
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: ListView.builder(
-                            itemBuilder: (_, baris) {
-                              final idxc = baris * 2;
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: List.generate(2, (idxr) {
-                                    try {
-                                      return Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              right: idxr == 0 ? 8.0 : 0),
-                                          child: PostItem(
-                                            state.result[idxc + idxr],
-                                            gridItem: true,
-                                          ),
-                                        ),
-                                      );
-                                    } catch (e) {
-                                      return Expanded(child: Container());
-                                    }
-                                  }),
-                                ),
-                              );
-                            },
-                            itemCount: jumBaris,
-                          ),
-                        );
-                      } else {
-                        return Container();
-                      }
-                    }),
+                child: _search_result(),
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _search_result extends StatefulWidget {
+  const _search_result({
+    super.key,
+  });
+
+  @override
+  State<_search_result> createState() => __search_resultState();
+}
+
+class __search_resultState extends State<_search_result> {
+  List<PostContent> feedList = [];
+  bool isLastPage = false;
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final jumBaris = (feedList.length / 2).ceil();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: SmartRefresher(
+        enablePullDown: false,
+        enablePullUp: true,
+        header: WaterDropHeader(),
+        footer: CustomFooter(
+          builder: (BuildContext context, LoadStatus? mode) {
+            final Widget body;
+            if (mode == LoadStatus.idle) {
+              body = Text("pull up load");
+            } else if (mode == LoadStatus.loading) {
+              body = CupertinoActivityIndicator();
+            } else if (mode == LoadStatus.failed) {
+              body = Text("Load Failed!Click retry!");
+            } else if (mode == LoadStatus.canLoading) {
+              body = Text("release to load more");
+            } else {
+              body = Text("No more Data");
+            }
+            return BlocConsumer<GetPostContentBloc, GetPostContentBlocState>(
+              listener: (context, state) {
+                if (state is GetPostContentBlocStateOnSuccess) {
+                  if (mounted) {
+                    if (state.searchParam.page == 1) {
+                      isLastPage = false;
+                      feedList.clear();
+                    }
+                    if (state.result.isEmpty) {
+                      isLastPage = true;
+                    }
+                    setState(() {
+                      feedList.addAll(state.result);
+                    });
+                  }
+                  _refreshController.loadComplete();
+                }
+              },
+              builder: (BuildContext context, state) {
+                if (state is GetPostContentBlocStateOnStarted) {
+                  return Center(
+                    child: SpinKitWave(
+                      color: Warna.warnaUtama,
+                      size: 50.0,
+                    ),
+                  );
+                }
+
+                return Container(
+                  height: 55.0,
+                );
+              },
+            );
+          },
+        ),
+        controller: _refreshController,
+        onRefresh: _onRefresh,
+        onLoading: () {
+          if (!isLastPage) {
+            BlocProvider.of<GetPostContentBloc>(context)
+                .add(GetPostContentBlocNextPage());
+          } else {
+            Future.delayed(Duration(seconds: 1))
+                .then((value) => _refreshController.loadComplete());
+          }
+        },
+        child: ListView.builder(
+          itemBuilder: (_, baris) {
+            final idxc = baris * 2;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(2, (idxr) {
+                  try {
+                    return Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(right: idxr == 0 ? 8.0 : 0),
+                        child: PostItem(
+                          feedList[idxc + idxr],
+                          gridItem: true,
+                        ),
+                      ),
+                    );
+                  } catch (e) {
+                    return Expanded(child: Container());
+                  }
+                }),
+              ),
+            );
+          },
+          itemCount: jumBaris,
         ),
       ),
     );
@@ -148,7 +204,7 @@ class _search_field extends StatelessWidget {
       style: OpenSansRegular11,
       onSubmitted: (str) => BlocProvider.of<GetPostContentBloc>(context)
           .add(GetPostContentBlocStart(SearchParam(
-        limit: 100,
+        limit: 6,
         filter: {
           "category_id": categoryId,
           "search": str,

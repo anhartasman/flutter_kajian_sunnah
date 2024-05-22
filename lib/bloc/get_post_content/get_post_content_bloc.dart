@@ -13,19 +13,24 @@ class GetPostContentBloc
   }) : super(GetPostContentBlocStateOnIdle()) {
     on<GetPostContentBlocEvent>((event, emit) async {
       if (event is GetPostContentBlocStart) {
-        emit(GetPostContentBlocStateOnStarted());
+        emit(GetPostContentBlocStateOnStarted(event.searchParam));
         try {
           final failureOrTrivia =
               await getPostContentUseCase(event.searchParam);
 
           final theData = await failureOrTrivia.first;
 
-          emit(GetPostContentBlocStateOnSuccess(theData));
+          emit(GetPostContentBlocStateOnSuccess(theData, event.searchParam));
         } catch (e) {
           emit(GetPostContentBlocStateOnError(
             errorMessage: e.toString(),
+            searchParam: event.searchParam,
           ));
         }
+      } else if (event is GetPostContentBlocNextPage) {
+        add(GetPostContentBlocStart(state.searchParam.copyWith(
+          page: state.searchParam.page + 1,
+        )));
       }
     });
   }

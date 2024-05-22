@@ -6,3 +6,5 @@ class GetPostContentBlocStart extends GetPostContentBlocEvent {
   final SearchParam searchParam;
   GetPostContentBlocStart(this.searchParam);
 }
+
+class GetPostContentBlocNextPage extends GetPostContentBlocEvent {}
