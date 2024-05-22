@@ -6,6 +6,7 @@ import 'package:kajiansunnah/helpers/resizer/fetch_pixels.dart';
 import 'package:kajiansunnah/injection_container.dart' as di;
 import 'package:kajiansunnah/routes/app_routes.dart';
 import 'package:kajiansunnah/screens/home_screen.dart';
+import 'package:kajiansunnah/screens/profile_screen.dart';
 import 'package:kajiansunnah/services/auth_service.dart';
 import 'package:kajiansunnah/widgets/DrawerContent.dart';
 import 'package:kajiansunnah/widgets/navbar/HomeNavBar.dart';
@@ -61,14 +62,14 @@ class HomePage extends StatelessWidget {
                     child: Container(key: ValueKey("favourite")),
                   );
                 }
-                if (state.menuActive == 3) {
+                if (state.menuActive == 4) {
                   return WillPopScope(
                     onWillPop: () {
                       BlocProvider.of<HomeNavBloc>(context)
                           .add(HomeNavBlocChange(0));
                       return Future.value(false);
                     },
-                    child: Container(),
+                    child: profile_screen(),
                   );
                 }
                 return WillPopScope(
