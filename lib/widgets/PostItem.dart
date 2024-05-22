@@ -25,7 +25,7 @@ class PostItem extends StatelessWidget {
       onTap: () => Get.to(detail_screen(postContent: postContent)),
       child: Container(
         width: gridItem ? null : FetchPixels.getPixelWidth(200),
-        margin: EdgeInsets.only(right: 8),
+        margin: gridItem ? null : EdgeInsets.only(right: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(11)),
           color: Colors.white,

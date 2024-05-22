@@ -8,7 +8,6 @@ import 'package:kajiansunnah/widgets/HomeContent.dart';
 import 'package:kajiansunnah/widgets/HomeHeader.dart';
 import 'package:kajiansunnah/widgets/HomeTopic.dart';
 import 'package:kajiansunnah/widgets/HomeUstadz.dart';
-import 'package:kajiansunnah/widgets/PageBar.dart';
 import 'package:kajiansunnah/widgets/reusables/ReusableWidget.dart';
 
 class home_screen extends StatelessWidget {

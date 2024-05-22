@@ -1,23 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kajiansunnah/architectures/domain/entities/PostContent.dart';
-import 'package:kajiansunnah/architectures/domain/entities/SearchParam.dart';
-import 'package:kajiansunnah/bloc/get_post_content/bloc.dart';
-import 'package:kajiansunnah/helpers/colors/color_data.dart';
 import 'package:kajiansunnah/helpers/resizer/fetch_pixels.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/theme/styles/text/opensans_style_text.dart';
 import 'package:kajiansunnah/theme/styles/text/prozalibre_style_text.dart';
-import 'package:kajiansunnah/widgets/HomeContent.dart';
-import 'package:kajiansunnah/widgets/HomeHeader.dart';
-import 'package:kajiansunnah/widgets/HomeTopic.dart';
-import 'package:kajiansunnah/widgets/HomeUstadz.dart';
-import 'package:kajiansunnah/widgets/PageBar.dart';
-import 'package:kajiansunnah/injection_container.dart' as di;
-import 'package:kajiansunnah/widgets/PostItem.dart';
 import 'package:kajiansunnah/widgets/reusables/ReusableWidget.dart';
-import 'package:shimmer/shimmer.dart';
 
 class detail_screen extends StatelessWidget {
   final PostContent postContent;

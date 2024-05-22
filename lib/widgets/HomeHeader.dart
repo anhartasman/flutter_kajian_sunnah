@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kajiansunnah/architectures/domain/entities/PostCategory.dart';
 import 'package:kajiansunnah/const/const_text.dart';
 import 'package:kajiansunnah/helpers/colors/color_data.dart';
 import 'package:kajiansunnah/helpers/resizer/fetch_pixels.dart';
+import 'package:kajiansunnah/screens/search_screen.dart';
 import 'package:kajiansunnah/theme/colors/Warna.dart';
 import 'package:kajiansunnah/theme/colors/light_colors.dart';
 import 'package:kajiansunnah/theme/styles/text/opensans_style_text.dart';
@@ -54,6 +57,9 @@ class HomeHeader extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16, bottom: 16.0),
             child: TextField(
               style: OpenSansRegular11,
+              onSubmitted: (str) => Get.to(search_screen(
+                keyword: str,
+              )),
               decoration: InputDecoration(
                 prefixIcon: Icon(
                   Icons.search,
@@ -71,7 +77,7 @@ class HomeHeader extends StatelessWidget {
                 hintStyle: OpenSansRegular14.copyWith(
                   color: Colors.grey,
                 ),
-                hintText: "apa yang kamu cari?",
+                hintText: "apa yang ingin kamu cari?",
                 fillColor: Colors.white,
                 isDense: true,
               ),
