@@ -5,6 +5,7 @@ import 'package:kajiansunnah/bloc/home_nav/bloc.dart';
 import 'package:kajiansunnah/helpers/resizer/fetch_pixels.dart';
 import 'package:kajiansunnah/injection_container.dart' as di;
 import 'package:kajiansunnah/routes/app_routes.dart';
+import 'package:kajiansunnah/screens/bookmark_tab_screen.dart';
 import 'package:kajiansunnah/screens/home_screen.dart';
 import 'package:kajiansunnah/screens/profile_screen.dart';
 import 'package:kajiansunnah/services/auth_service.dart';
@@ -49,7 +50,7 @@ class HomePage extends StatelessWidget {
                           .add(HomeNavBlocChange(0));
                       return Future.value(false);
                     },
-                    child: Container(key: ValueKey("all")),
+                    child: bookmark_tab_screen(),
                   );
                 }
                 if (state.menuActive == 2) {
