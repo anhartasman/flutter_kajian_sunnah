@@ -8,6 +8,7 @@
     pkgs.nodePackages.firebase-tools
     pkgs.jdk11
     pkgs.unzip
+    pkgs.nano
   ];
   # Sets environment variables in the workspace
   env = {};
@@ -20,6 +21,13 @@
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
       onCreate = {
+        build-mkdir = ''
+         dart pub global activate fvm
+         echo 'export PATH="$PATH":"$HOME/.pub-cache/bin"' >>~/.bashrc
+         source ~/.bashrc
+         fvm use 3.10.0
+         #testes
+        '';
         build-flutter = ''
           cd /home/user/myapp/android
 
@@ -43,8 +51,7 @@
 
           adb -s localhost:5555 wait-for-device
         '';
-      };
-      
+      }; 
       # To run something each time the workspace is (re)started, use the `onStart` hook
     };
     # Enable previews and customize configuration
