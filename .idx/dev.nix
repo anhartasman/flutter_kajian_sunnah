@@ -21,14 +21,10 @@
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
       onCreate = {
-        build-mkdir = ''
-         dart pub global activate fvm
-         echo 'export PATH="$PATH":"$HOME/.pub-cache/bin"' >>~/.bashrc
-         source ~/.bashrc
-         $HOME/.pub-cache/bin/fvm use 3.10.0
-         #testes
-        '';
         build-flutter = ''
+          cd ~/flutter
+          git checkout 3.10.0
+          flutter --version
           cd /home/user/myapp/android
 
           ./gradlew \
