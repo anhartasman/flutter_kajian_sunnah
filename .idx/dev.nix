@@ -25,7 +25,7 @@
          dart pub global activate fvm
          echo 'export PATH="$PATH":"$HOME/.pub-cache/bin"' >>~/.bashrc
          source ~/.bashrc
-         fvm use 3.10.0
+         $HOME/.pub-cache/bin/fvm use 3.10.0
          #testes
         '';
         build-flutter = ''
