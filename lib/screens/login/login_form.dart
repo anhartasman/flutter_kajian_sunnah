@@ -129,6 +129,7 @@ class _login_formState extends State<login_form> {
             bottom: 24.0,
           ),
           child: InkWell(
+            key: ValueKey("btnLogin"),
             onTap: submit,
             child: Container(
               padding: EdgeInsets.symmetric(

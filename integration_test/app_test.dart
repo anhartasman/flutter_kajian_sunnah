@@ -15,7 +15,9 @@ void main() {
 
       await Future.delayed(Duration(seconds: 5));
       // Verify the counter starts at 0.
-      expect(find.byKey(ValueKey("inputLokasiGPM")), findsOneWidget);
+      expect(find.byKey(ValueKey("halamanSplash")), findsOneWidget);
+      await tester.pumpAndSettle();
+      expect(find.byKey(ValueKey("btnContinue")), findsOneWidget);
 
       // Finds the floating action button to tap on.
       // final Finder fab = find.byTooltip('Increment');

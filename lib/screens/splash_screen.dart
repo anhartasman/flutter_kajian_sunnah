@@ -29,6 +29,7 @@ class splash_screen extends StatelessWidget {
       create: (BuildContext context) =>
           di.sl<SplashCheckBloc>()..add(SplashCheckStart()),
       child: Scaffold(
+        key: ValueKey("halamanSplash"),
         // backgroundColor: LightColors.kLightYellow,
         backgroundColor: Colors.white,
         body: BlocConsumer<SplashCheckBloc, SplashCheckBlocState>(
@@ -38,8 +39,10 @@ class splash_screen extends StatelessWidget {
               Future.delayed(const Duration(milliseconds: 500))
                   .then((value) => Get.off(welcome_screen()));
             } else {
+              // Future.delayed(const Duration(milliseconds: 500))
+              //     .then((value) => Get.offNamed(Routes.homeMenuRoute));
               Future.delayed(const Duration(milliseconds: 500))
-                  .then((value) => Get.offNamed(Routes.homeMenuRoute));
+                  .then((value) => Get.off(welcome_screen()));
             }
           }
         }, builder: (BuildContext context, state) {

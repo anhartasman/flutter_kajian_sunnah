@@ -106,6 +106,7 @@ class welcome_screen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 40, top: 24.0),
                 child: InkWell(
+                  key: ValueKey("btnContinue"),
                   onTap: () => Get.toNamed(Routes.homeMenuRoute),
                   child: Text(
                     "Continue without sign in",

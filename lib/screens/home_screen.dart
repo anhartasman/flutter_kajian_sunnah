@@ -59,10 +59,13 @@ class home_screen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16.0),
-                child: HomeContent(PostCategory(
-                  id: 3,
-                  name: "Pengumuman",
-                )),
+                child: HomeContent(
+                  PostCategory(
+                    id: 3,
+                    name: "Pengumuman",
+                  ),
+                  key: ValueKey("homePengumuman"),
+                ),
               ),
               SizedBox(
                 height: 32,

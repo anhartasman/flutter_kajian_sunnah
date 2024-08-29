@@ -89,6 +89,8 @@ flutter_icons:
   image_path: "assets/icon/app_icon.png"
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
   integration_test:
     sdk: flutter
   flutter_driver:

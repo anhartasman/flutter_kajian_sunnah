@@ -28,6 +28,7 @@ class HomePage extends StatelessWidget {
         key: scaffoldKey,
         backgroundColor: Colors.white,
         body: Column(
+          key: ValueKey("columnHome"),
           children: [
             Expanded(
               child: BlocConsumer<HomeNavBloc, HomeNavBlocState>(
